@@ -70,15 +70,17 @@ let keyboardKeys = [
 ];
 
 let currentKeyboardLanguage = 1; // 1: russian, 3: english - according to indexes of keyboardKeys array
-let counter = 0;
 
+if (localStorage.getItem('currentKeyboardLanguage') !== null)
+  currentKeyboardLanguage = localStorage.getItem('currentKeyboardLanguage');
+
+let counter = 0;
 for (counter = keyboardKeys.length - 1; counter >= 0; counter--) {
   let div = document.createElement('div');
-  div.className = "key";
-  div.id = keyboardKeys[counter][0];
+  div.className = "key " + keyboardKeys[counter][0];
   let innerSpan = document.createElement('span');
   innerSpan.className = "innerSpan";
-  innerSpan.innerHTML = keyboardKeys[counter][1];
+  innerSpan.innerHTML = keyboardKeys[counter][currentKeyboardLanguage];
   div.innerHTML = innerSpan.outerHTML;
   document.body.prepend(div);
 }
@@ -88,24 +90,14 @@ textarea.className = "textarea";
 textarea.id = "textarea";
 document.body.prepend(textarea);
 
-function shiftKeyboard(isShiftPressed) {
-  if (isShiftPressed) {
-    currentKeyboardLanguage += 1;
-  } else {
-    currentKeyboardLanguage -= 1;
-  }
-  let elements = document.querySelectorAll('span');
-  for (counter = 0; counter < keyboardKeys.length - 11 - 1; counter++) {
-    elements[counter].innerHTML = keyboardKeys[counter][currentKeyboardLanguage];
-  }
-}
-
 function changeKeyboardLanguage() {
   if (currentKeyboardLanguage == 1) {
     currentKeyboardLanguage = 3;
+    localStorage.setItem('currentKeyboardLanguage', currentKeyboardLanguage);
   }
   else {
     currentKeyboardLanguage = 1;
+    localStorage.setItem('currentKeyboardLanguage', currentKeyboardLanguage);
   }
 
   counter = 0;
@@ -116,27 +108,51 @@ function changeKeyboardLanguage() {
   }
 }
 
-function getKeyValue(eventCode) {
+function getKeyValue(keyCode) {
   counter = 0;
   for (counter = keyboardKeys.length - 1; counter >= 0; counter--) {
-    if (eventCode == keyboardKeys[counter][0])
+    if (keyCode == keyboardKeys[counter][0])
       return keyboardKeys[counter][currentKeyboardLanguage];
   }
 }
 
 document.addEventListener('keydown', 
   function(event) {
-    event.preventDefault();
     if (event.altKey && event.shiftKey) {
       changeKeyboardLanguage();
     }
     textarea.value += getKeyValue(event.code);
-    let pressedKey = document.getElementById(event.code);
-    pressedKey.classList.add("pressedKey");
+    let pressedKey = document.getElementsByClassName(event.code);
+    for (let element of pressedKey) {
+      element.classList.add("activatedKey");
+    }
     setTimeout(
       function () {
-      pressedKey.classList.remove("pressedKey");
+        for (let element of pressedKey) {
+          element.classList.remove("activatedKey");
+        }
       }, 300);
   
+  }
+);
+
+document.addEventListener('click', 
+  function(event) {
+    let clickedKeyCode = "";
+    if (event.target.className.includes("key"))
+      clickedKeyCode = event.target.className.split(" ")[1];
+    else if (event.target.parentElement.className.includes("key"))
+      clickedKeyCode = event.target.parentElement.className.split(" ")[1];
+    textarea.value += getKeyValue(clickedKeyCode);
+    let clickedKey = document.getElementsByClassName(clickedKeyCode);
+    for (let element of clickedKey) {
+      element.classList.add("activatedKey");
+    }
+    setTimeout(
+      function () {
+        for (let element of clickedKey) {
+          element.classList.remove("activatedKey");
+        }
+      }, 300);
   }
 );

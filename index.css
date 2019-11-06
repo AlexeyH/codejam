@@ -36,33 +36,33 @@ body {
   width: fit-content;
 }
 
-.pressedKey {
+.activatedKey {
   background-color: blueviolet;
 }
 
-#Backspace,
-#Enter {
-  grid-column-start: 14;
-  grid-column-end: 16;
-}
-
-#Tab,
-#CapsLock,
-#ShiftLeft {
+.Tab,
+.CapsLock,
+.ShiftLeft {
   grid-column-start: 1;
   grid-column-end: 3;
 }
 
-#Space {
+.Backspace,
+.Enter {
+  grid-column-start: 14;
+  grid-column-end: 16;
+}
+
+.Space {
   grid-column-start: 4;
   grid-column-end: 11;
 }
 
-#ArrowUp,
-#ArrowDown {
+.ArrowUp,
+.ArrowDown {
   font-size: 1.3rem;
 }
 
-#ArrowDown {
+.ArrowDown {
   transform: rotate(180deg);
 }
