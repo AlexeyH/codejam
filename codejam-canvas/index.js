@@ -1,46 +1,15 @@
-let elem = document.querySelector("input");
+const canvasSize = 512;
+const canvas = document.querySelector("canvas");
+const context = canvas.getContext("2d");
+canvas.width = canvasSize;
+canvas.height = canvasSize;
 
-elem.addEventListener ('click', function() {
-  elem.checked = true;
-  if (elem.id = "4x4" & elem.checked) {
-    fourXFour();
-  }
-  if (elem.id = "32x32" & elem.checked) {
-    thirtyTwoXThirtyTwo();
-  }
-  if (elem.id = "256x256" & elem.checked) {
-    png();
-  }
-});
-
-function fourXFour() {
-
-    var A = [["00BCD4", "FFEB3B","FFEB3B","00BCD4"],
+var row, col;
+const A4x4 = [["00BCD4", "FFEB3B","FFEB3B","00BCD4"],
             ["FFEB3B", "FFC107","FFC107","FFEB3B"],
             ["FFEB3B", "FFC107","FFC107","FFEB3B"],
             ["00BCD4", "FFEB3B","FFEB3B","00BCD4"]];
-
-    var canvas = document.querySelector("canvas"),
-    context = canvas.getContext("2d"),
-    width = A[0].length,
-    height = A.length,
-    scale = 512 / width;
-
-    canvas.width = width * scale;
-    canvas.height = height * scale;
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    for(var row = 0; row < height; row++) {
-      for(var col = 0; col < width; col++) {
-        context.fillStyle = "#" + A[row][col];
-        context.fillRect(col * scale, row * scale, scale, scale);
-      }
-    }
-}
-
-function thirtyTwoXThirtyTwo() {
-
-var A = 
+const A32x32 = 
 [
     [
       [
@@ -6252,36 +6221,38 @@ var A =
     ]
   ];
 
-  var canvas = document.querySelector("canvas"),
-  context = canvas.getContext("2d"),
-  width = A[0].length,
-  height = A.length,
-  scale = 512 / width;
-  
-  canvas.width = width * scale;
-  canvas.height = height * scale;
-  
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  for(var row = 0; row < height; row++) {
-    for(var col = 0; col < width; col++) {
-      
-      context.fillStyle = "rgba(" + A[row][col][0] + "," + A[row][col][1] + "," + A[row][col][2] + "," + (A[row][col][3] / 256) + ")"; // Set the color to the one specified
+function getFillStyle(A, type) {
+  if (type == "hex") {
+    context.fillStyle = "#" + A[row][col];
+  } else if (type == "rgba") {
+    context.fillStyle = "rgba(" + A[row][col][0] + "," + A[row][col][1] + "," 
+                                + A[row][col][2] + "," + (A[row][col][3] / 256) + ")";
+  }
+}
+
+function renderJSON(A, type) {
+  const width = A[0].length;
+  const height = A.length;
+  const scale = canvasSize / width;
+
+  context.clearRect(0, 0, canvasSize, canvasSize);
+  for(row = 0; row < height; row++) {
+    for(col = 0; col < width; col++) {
+      getFillStyle(A, type);
       context.fillRect(col * scale, row * scale, scale, scale);
     }
   }
 }
+
+function fourXFour() {
+  renderJSON(A4x4, "hex");
+}
+
+function thirtyTwoXThirtyTwo() {
+  renderJSON(A32x32, "rgba");
+}
   
 function png() {
-
-  var canvas = document.querySelector("canvas"),
-  context = canvas.getContext("2d"),
-  width = 512,
-  height = 512,
-  scale = 512 / width;
-
-  canvas.width = width * scale;
-  canvas.height = height * scale;
-
   base_image = new Image();
   base_image.src = 'assets/images/image.png';
   base_image.onload = function() {
