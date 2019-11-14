@@ -1,0 +1,93 @@
+.body-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.topMenu {
+  display: flex;
+  font-family: Roboto, Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+}
+
+.topMenu-menu-button-img {
+  margin-right: 20px;
+}
+
+.topMenu-menu-button-img-additional {
+  /* To press to the right edge it needs to set "margin-left: auto". 
+  If the item you want to press is not the far right, set "order: 2" for this item. */
+  margin-left: auto; 
+}
+
+.flex-wrapper {
+  display: flex;
+}
+
+.asideMenu {
+  width: 200px;
+}
+
+.menu-action,
+.menu-colors {
+  list-style-type: none;
+  border-left: 1px solid #bbb;
+  border-right: 1px solid #bbb;
+  border-bottom: 3px solid #aaa;
+  padding: 0;
+}
+
+.menu-list-item {
+  padding: 10px 20px;
+}
+
+.menu-list-item:nth-child(2) {
+  border-bottom: 1px solid #bbb;;
+}
+
+.menu-list-item-text {
+  height: 20px;
+  vertical-align: top;
+  margin-left: 10px;
+}
+
+.menu-colors {
+  margin-top: 40px;
+}
+
+.color-circle {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+.gray {
+  background-color: #C4C4C4;
+}
+
+.green {
+  background-color: #41F795;
+}
+
+.red {
+  background-color: #F74141;
+}
+
+.blue {
+  background-color: #41B6F7;
+}
+
+.input-radio-list {
+  margin: 20px;
+}
+
+.input-radio-list li {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.canvas {
+  width: 512px;
+  margin-left: 50px;
+}

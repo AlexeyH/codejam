@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+  <body>
+    <div class="body-wrapper">
+      <menu class="topMenu">
+          <img class="topMenu-menu-button-img" src="assets/images/topMenu.svg" alt="topMenu">
+          <h1>CodeJam - Pallete</h1>
+          <img class="topMenu-menu-button-img topMenu-menu-button-img-additional" src="assets/images/topMenuAdditional.svg" alt="topMenuAdditional">
+      </menu>
+      <div class="flex-wrapper">
+        <menu class="asideMenu">
+          <ul class="menu-action">
+            <li class="menu-list-item">
+              <img class="menu-list-item-img" src="assets/images/paintBucket.svg" alt="Paint bucket">
+              <span class="menu-list-item-text">Paint bucket</span></li>
+            <li class="menu-list-item">
+              <img class="menu-list-item-img" src="assets/images/chooseColor.svg" alt="Choose color">
+              <span class="menu-list-item-text">Choose color</span></li>
+            <li class="menu-list-item">
+              <img class="menu-list-item-img" src="assets/images/move.svg" alt="Move">
+              <span class="menu-list-item-text">Move</span></li>
+            <li class="menu-list-item">
+              <img class="menu-list-item-img" src="assets/images/transform.svg" alt="Transform">
+              <span class="menu-list-item-text">Transform</span></li>
+          </ul>
+          <ul class="menu-colors">
+              <li class="menu-list-item">
+                <div class="color-circle gray"></div>
+                <span class="menu-list-item-text">Current color</span></li>
+              <li class="menu-list-item">
+                <div class="color-circle green"></div>
+                <span class="menu-list-item-text">Prev color</span></li>
+              <li class="menu-list-item">
+                <div class="color-circle red"></div>
+                <span class="menu-list-item-text">red</span></li>
+              <li class="menu-list-item">
+                <div class="color-circle blue"></div>
+                <span class="menu-list-item-text">blue</span></li>
+            </ul>
+        </menu>
+        <script src="index.js" defer></script>
+        <canvas class="canvas">Your browser does not support the HTML5 canvas tag.</canvas>
+        <ul class="input-radio-list">
+          <li><input id="4x4" type="radio" name="choose-image" onclick="fourXFour()" checked>4x4</input></li>
+          <li><input id="32x32" type="radio" name="choose-image" onclick="thirtyTwoXThirtyTwo()">32x32</input></li>
+          <li><input id="256x256" type="radio" name="choose-image" onclick="png()">256x256</input></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
